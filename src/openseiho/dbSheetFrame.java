@@ -874,22 +874,22 @@ private dbAccess dbAc;
 
         jSplitPane1.setRightComponent(jPanelSheet);
 
-        jTabbedPaneSheet.addTab(org.openide.util.NbBundle.getMessage(dbSheetFrame.class, "dbSheetFrame.jSplitPane1.TabConstraints.tabTitle"), jSplitPane1); // NOI18N
+        jTabbedPaneSheet.addTab(org.openide.util.NbBundle.getMessage(dbSheetFrame.class, "dbSheetFrame.jSplitPane1.TabConstraints.tabTitle_1"), jSplitPane1); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(dbSheetFrame.class, "dbSheetFrame.jLabel1.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(dbSheetFrame.class, "dbSheetFrame.jLabel1.text_1")); // NOI18N
 
         jTextFieldTableName.setEditable(false);
-        jTextFieldTableName.setText(org.openide.util.NbBundle.getMessage(dbSheetFrame.class, "dbSheetFrame.jTextFieldTableName.text")); // NOI18N
+        jTextFieldTableName.setText(org.openide.util.NbBundle.getMessage(dbSheetFrame.class, "dbSheetFrame.jTextFieldTableName.text_1")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, org.openide.util.NbBundle.getMessage(dbSheetFrame.class, "dbSheetFrame.jLabel2.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, org.openide.util.NbBundle.getMessage(dbSheetFrame.class, "dbSheetFrame.jLabel2.text_1")); // NOI18N
 
         jTextFieldWhere.setEditable(false);
-        jTextFieldWhere.setText(org.openide.util.NbBundle.getMessage(dbSheetFrame.class, "dbSheetFrame.jTextFieldWhere.text")); // NOI18N
+        jTextFieldWhere.setText(org.openide.util.NbBundle.getMessage(dbSheetFrame.class, "dbSheetFrame.jTextFieldWhere.text_1")); // NOI18N
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabelPosision, org.openide.util.NbBundle.getMessage(dbSheetFrame.class, "dbSheetFrame.jLabelPosision.text")); // NOI18N
 
-        jButtonUpdt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/OpenSeiho/checkbox.png"))); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(jButtonUpdt, org.openide.util.NbBundle.getMessage(dbSheetFrame.class, "dbSheetFrame.jButtonUpdt.text")); // NOI18N
+        jButtonUpdt.setIcon(new javax.swing.ImageIcon("/home/hdm/NetBeansProjects/OpenSeihoCom/src/openseiho/checkbox.png")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jButtonUpdt, org.openide.util.NbBundle.getMessage(dbSheetFrame.class, "dbSheetFrame.jButtonUpdt.text_1")); // NOI18N
         jButtonUpdt.setToolTipText(org.openide.util.NbBundle.getMessage(dbSheetFrame.class, "dbSheetFrame.jButtonUpdt.toolTipText")); // NOI18N
         jButtonUpdt.setEnabled(false);
         jButtonUpdt.addActionListener(new java.awt.event.ActionListener() {
@@ -898,8 +898,8 @@ private dbAccess dbAc;
             }
         });
 
-        jButtonDel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/OpenSeiho/document-close.png"))); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(jButtonDel, org.openide.util.NbBundle.getMessage(dbSheetFrame.class, "dbSheetFrame.jButtonDel.text")); // NOI18N
+        jButtonDel.setIcon(new javax.swing.ImageIcon("/home/hdm/NetBeansProjects/OpenSeihoCom/src/openseiho/document-close.png")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jButtonDel, org.openide.util.NbBundle.getMessage(dbSheetFrame.class, "dbSheetFrame.jButtonDel.text_1")); // NOI18N
         jButtonDel.setToolTipText(org.openide.util.NbBundle.getMessage(dbSheetFrame.class, "dbSheetFrame.jButtonDel.toolTipText")); // NOI18N
         jButtonDel.setEnabled(false);
         jButtonDel.addActionListener(new java.awt.event.ActionListener() {
@@ -908,9 +908,9 @@ private dbAccess dbAc;
             }
         });
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel3, org.openide.util.NbBundle.getMessage(dbSheetFrame.class, "dbSheetFrame.jLabel3.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel3, org.openide.util.NbBundle.getMessage(dbSheetFrame.class, "dbSheetFrame.jLabel3.text_1")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel4, org.openide.util.NbBundle.getMessage(dbSheetFrame.class, "dbSheetFrame.jLabel4.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel4, org.openide.util.NbBundle.getMessage(dbSheetFrame.class, "dbSheetFrame.jLabel4.text_1")); // NOI18N
 
         javax.swing.GroupLayout jPanelEditLayout = new javax.swing.GroupLayout(jPanelEdit);
         jPanelEdit.setLayout(jPanelEditLayout);
@@ -970,7 +970,7 @@ private dbAccess dbAc;
 
         jScrollPaneEdit.setViewportView(jPanelEdit);
 
-        jTabbedPaneSheet.addTab(org.openide.util.NbBundle.getMessage(dbSheetFrame.class, "dbSheetFrame.jScrollPaneEdit.TabConstraints.tabTitle"), jScrollPaneEdit); // NOI18N
+        jTabbedPaneSheet.addTab(org.openide.util.NbBundle.getMessage(dbSheetFrame.class, "dbSheetFrame.jScrollPaneEdit.TabConstraints.tabTitle_1"), jScrollPaneEdit); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

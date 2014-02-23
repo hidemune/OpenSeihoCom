@@ -1,0 +1,23 @@
+for Debian
+
+# passwd postgres
+
+sudo su - postgres
+psql -c "alter user postgres with password 'xxxxxxxx'"
+
+exit
+
+$ sudo su - postgres
+$ createdb -O postgres OpenSeiho
+
+comboIdTextで、
+createtable!
+を入力してEnterを押す
+
+
+# su - postgres
+
+psql -U postgres OpenSeiho
+COPY id_text FROM '/home/hdm/NetBeansProjects/OpenSeihoCom/id_text.csv' WITH CSV;
+
+

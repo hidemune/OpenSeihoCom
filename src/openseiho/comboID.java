@@ -153,6 +153,7 @@ private int defaultID1 = 0;
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         jSplitPane1 = new javax.swing.JSplitPane();
         Caption = new javax.swing.JLabel();
@@ -169,7 +170,6 @@ private int defaultID1 = 0;
         jSplitPane1.setFocusTraversalPolicyProvider(true);
         jSplitPane1.setMinimumSize(new java.awt.Dimension(300, 22));
 
-        org.openide.awt.Mnemonics.setLocalizedText(Caption, org.openide.util.NbBundle.getMessage(comboID.class, "comboID.Caption.text")); // NOI18N
         Caption.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         Caption.setDoubleBuffered(true);
         jSplitPane1.setLeftComponent(Caption);
@@ -185,7 +185,6 @@ private int defaultID1 = 0;
         jSplitPane2.setOneTouchExpandable(true);
         jSplitPane2.setPreferredSize(new java.awt.Dimension(0, 22));
 
-        org.openide.awt.Mnemonics.setLocalizedText(postCap, org.openide.util.NbBundle.getMessage(comboID.class, "comboID.postCap.text")); // NOI18N
         postCap.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         postCap.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         postCap.setPreferredSize(new java.awt.Dimension(0, 13));
@@ -196,6 +195,10 @@ private int defaultID1 = 0;
         jComboBox1.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         jComboBox1.setMinimumSize(new java.awt.Dimension(0, 22));
         jComboBox1.setPreferredSize(new java.awt.Dimension(100, 22));
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jComboBox1, org.jdesktop.beansbinding.ObjectProperty.create(), jComboBox1, org.jdesktop.beansbinding.BeanProperty.create("elements"));
+        bindingGroup.addBinding(binding);
+
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -216,6 +219,8 @@ private int defaultID1 = 0;
         jSplitPane1.setRightComponent(jSplitPane2);
 
         add(jSplitPane1);
+
+        bindingGroup.bind();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -293,5 +298,6 @@ private int defaultID1 = 0;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JSplitPane jSplitPane2;
     private javax.swing.JLabel postCap;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

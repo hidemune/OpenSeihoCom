@@ -115,13 +115,12 @@ private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
         jSplitPane1.setDividerSize(1);
         jSplitPane1.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
 
-        org.openide.awt.Mnemonics.setLocalizedText(Caption, org.openide.util.NbBundle.getMessage(textYmdPanel.class, "textYmdPanel.Caption.text_1")); // NOI18N
+        Caption.setText("Caption");
         Caption.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         Caption.setFocusable(false);
         Caption.setName("Caption"); // NOI18N
         Caption.setPreferredSize(new java.awt.Dimension(50, 23));
         jSplitPane1.setLeftComponent(Caption);
-        Caption.getAccessibleContext().setAccessibleName(org.openide.util.NbBundle.getMessage(textYmdPanel.class, "textYmdPanel.Caption.AccessibleContext.accessibleName")); // NOI18N
 
         jSplitPane2.setBorder(null);
         jSplitPane2.setDividerLocation(150);
@@ -129,17 +128,14 @@ private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
         jSplitPane2.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
 
         ID.setEditable(false);
-        ID.setText(org.openide.util.NbBundle.getMessage(textYmdPanel.class, "textYmdPanel.ID.text_1")); // NOI18N
+        ID.setText("yyyymmdd");
         ID.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         ID.setFocusTraversalPolicyProvider(true);
         ID.setFocusable(false);
         ID.setName("ID"); // NOI18N
         ID.setPreferredSize(new java.awt.Dimension(60, 17));
         jSplitPane2.setRightComponent(ID);
-        ID.getAccessibleContext().setAccessibleName(org.openide.util.NbBundle.getMessage(textYmdPanel.class, "textYmdPanel.ID.AccessibleContext.accessibleName")); // NOI18N
-        ID.getAccessibleContext().setAccessibleDescription(org.openide.util.NbBundle.getMessage(textYmdPanel.class, "textYmdPanel.ID.AccessibleContext.accessibleDescription")); // NOI18N
 
-        txtYMD.setText(org.openide.util.NbBundle.getMessage(textYmdPanel.class, "textYmdPanel.txtYMD.text_1")); // NOI18N
         txtYMD.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         txtYMD.setMinimumSize(new java.awt.Dimension(120, 17));
         txtYMD.setPreferredSize(new java.awt.Dimension(150, 17));

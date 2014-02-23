@@ -170,6 +170,7 @@ private int defaultID1 = 0;
         jSplitPane1.setFocusTraversalPolicyProvider(true);
         jSplitPane1.setMinimumSize(new java.awt.Dimension(300, 22));
 
+        Caption.setText("Caption");
         Caption.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         Caption.setDoubleBuffered(true);
         jSplitPane1.setLeftComponent(Caption);
@@ -185,15 +186,15 @@ private int defaultID1 = 0;
         jSplitPane2.setOneTouchExpandable(true);
         jSplitPane2.setPreferredSize(new java.awt.Dimension(0, 22));
 
+        postCap.setText("postCap");
         postCap.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         postCap.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         postCap.setPreferredSize(new java.awt.Dimension(0, 13));
         jSplitPane2.setRightComponent(postCap);
 
         jComboBox1.setEditable(true);
-        jComboBox1.setActionCommand(org.openide.util.NbBundle.getMessage(comboID.class, "comboID.jComboBox1.actionCommand")); // NOI18N
         jComboBox1.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
-        jComboBox1.setMinimumSize(new java.awt.Dimension(0, 22));
+        jComboBox1.setMinimumSize(new java.awt.Dimension(50, 22));
         jComboBox1.setPreferredSize(new java.awt.Dimension(100, 22));
 
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jComboBox1, org.jdesktop.beansbinding.ObjectProperty.create(), jComboBox1, org.jdesktop.beansbinding.BeanProperty.create("elements"));

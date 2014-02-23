@@ -194,14 +194,12 @@ private JyusyoPanel jyusyoPanel;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        textZipCode.setText(org.openide.util.NbBundle.getMessage(JyusyoJDialog.class, "JyusyoJDialog.textZipCode.text")); // NOI18N
         textZipCode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textZipCodeActionPerformed(evt);
             }
         });
 
-        textJyusyo1.setText(org.openide.util.NbBundle.getMessage(JyusyoJDialog.class, "JyusyoJDialog.textJyusyo1.text")); // NOI18N
         textJyusyo1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textJyusyo1ActionPerformed(evt);
@@ -215,16 +213,15 @@ private JyusyoPanel jyusyoPanel;
             }
         });
 
-        org.openide.awt.Mnemonics.setLocalizedText(jButton2, org.openide.util.NbBundle.getMessage(JyusyoJDialog.class, "JyusyoJDialog.jButton2.text")); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel3, org.openide.util.NbBundle.getMessage(JyusyoJDialog.class, "JyusyoJDialog.jLabel3.text")); // NOI18N
+        jLabel3.setText("〒");
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel4, org.openide.util.NbBundle.getMessage(JyusyoJDialog.class, "JyusyoJDialog.jLabel4.text")); // NOI18N
+        jLabel4.setText("住所");
 
         listJyusyo.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -251,7 +248,7 @@ private JyusyoPanel jyusyoPanel;
                         .add(textJyusyo1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 242, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(comboTodoufuken, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 105, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 363, Short.MAX_VALUE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 324, Short.MAX_VALUE)
                         .add(jButton2)))
                 .addContainerGap())
         );

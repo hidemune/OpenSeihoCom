@@ -81,27 +81,23 @@ java.awt.Frame frm = null;
 
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        textZipCode.setText(org.openide.util.NbBundle.getMessage(JyusyoPanel.class, "JyusyoPanel.textZipCode.text")); // NOI18N
         textZipCode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textZipCodeActionPerformed(evt);
             }
         });
 
-        textJyusyo1.setText(org.openide.util.NbBundle.getMessage(JyusyoPanel.class, "JyusyoPanel.textJyusyo1.text")); // NOI18N
         textJyusyo1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textJyusyo1ActionPerformed(evt);
             }
         });
 
-        textJyusyo2.setText(org.openide.util.NbBundle.getMessage(JyusyoPanel.class, "JyusyoPanel.textJyusyo2.text")); // NOI18N
+        jLabel4.setText("〒");
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel4, org.openide.util.NbBundle.getMessage(JyusyoPanel.class, "JyusyoPanel.jLabel4.text")); // NOI18N
+        jLabel5.setText("住所１");
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel5, org.openide.util.NbBundle.getMessage(JyusyoPanel.class, "JyusyoPanel.jLabel5.text")); // NOI18N
-
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel6, org.openide.util.NbBundle.getMessage(JyusyoPanel.class, "JyusyoPanel.jLabel6.text")); // NOI18N
+        jLabel6.setText("住所２");
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
@@ -119,7 +115,7 @@ java.awt.Frame frm = null;
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                     .add(textJyusyo1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 357, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(textJyusyo2))
-                .add(0, 381, Short.MAX_VALUE))
+                .add(0, 11, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)

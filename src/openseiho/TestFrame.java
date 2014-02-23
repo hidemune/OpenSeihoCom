@@ -32,34 +32,17 @@ private textYmdPanel textYmd;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        textYmdPanel1 = new openseiho.textYmdPanel();
-        comboID1 = new openseiho.comboID();
-        jyusyoPanel1 = new openseiho.JyusyoPanel();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        comboID1.setCaption(org.openide.util.NbBundle.getMessage(TestFrame.class, "TestFrame.comboID1.caption")); // NOI18N
-        comboID1.setComboWidth(new java.lang.Integer(160));
-        comboID1.setId0(new java.lang.Integer(1));
-        comboID1.setPostCap(org.openide.util.NbBundle.getMessage(TestFrame.class, "TestFrame.comboID1.postCap")); // NOI18N
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(textYmdPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 300, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-            .add(jyusyoPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-            .add(comboID1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 290, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            .add(0, 873, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
-                .add(textYmdPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(comboID1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jyusyoPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(0, 4, Short.MAX_VALUE))
+            .add(0, 102, Short.MAX_VALUE)
         );
 
         pack();
@@ -101,8 +84,5 @@ private textYmdPanel textYmd;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private openseiho.comboID comboID1;
-    private openseiho.JyusyoPanel jyusyoPanel1;
-    private openseiho.textYmdPanel textYmdPanel1;
     // End of variables declaration//GEN-END:variables
 }

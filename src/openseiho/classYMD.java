@@ -18,7 +18,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Properties;
 import javax.swing.JOptionPane;
-import org.openide.util.Exceptions;
+//import org.openide.util.Exceptions;
 
 
 /**
@@ -176,7 +176,7 @@ public class classYMD {
             df = new SimpleDateFormat("yyyyMMdd");
             date = DateFormat.getDateInstance().parse(str);
         } catch (ParseException ex) {
-            Exceptions.printStackTrace(ex);
+            ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "日付の書式に誤りがあります。\n" + str, "エラー", JOptionPane.ERROR_MESSAGE);
             return def;
         }

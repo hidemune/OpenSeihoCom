@@ -226,7 +226,7 @@ private int defaultID1 = 0;
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
-        DebugMode = true;
+        //DebugMode = true;
         logDebug("jComboBox1ActionPerformed:" + evt.getActionCommand());
         if (evt.getActionCommand().equals("comboBoxEdited")){
             String str = (String) jComboBox1.getSelectedItem();

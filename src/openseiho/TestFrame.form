@@ -12,7 +12,7 @@
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
-    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="2"/>
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
@@ -50,6 +50,9 @@
     <Component class="openseiho.textYmdPanel" name="textYmdPanel1">
     </Component>
     <Component class="openseiho.comboID" name="comboID1">
+      <Properties>
+        <Property name="id0" type="java.lang.Integer" value="1"/>
+      </Properties>
     </Component>
     <Component class="openseiho.JyusyoPanel" name="jyusyoPanel1">
     </Component>

@@ -7,6 +7,7 @@
 package openseiho;
 
 import java.awt.Dimension;
+import java.util.ArrayList;
 import javax.swing.JPanel;
 
 /**
@@ -25,6 +26,7 @@ private dbIdText dbIT;
 private Integer ID0 = 0;
 private String[][] rs;
 private int defaultID1 = 0;
+public static ArrayList<String[][]> arrRs = new ArrayList<String[][]>();        //同じIDで何度も読むのを防ぐため、機能追加
 
     //共通部分
     public static boolean DebugMode = false;
@@ -41,7 +43,7 @@ private int defaultID1 = 0;
         initComponents();
         //dbIT.DebugMode = true;
         dbIT = new dbIdText();
-        setComboWidth(100);
+        //setComboWidth(100);
         //日本語入力はしない前提で。    Linuxでうまく動かない
         enableInputMethods(false);
         jComboBox1.enableInputMethods(false);
@@ -109,8 +111,29 @@ private int defaultID1 = 0;
         jSplitPane2.repaint();
     }
     private void setList(){
+        boolean flg = false;
+        for (int i = 0; i < arrRs.size(); i++) {
+            try {
+                String str = ((String[][])arrRs.get(i))[0][1];
+                /*
+                System.err.println(((String[][])arrRs.get(i))[0][1]);
+                System.err.println(((String[][])arrRs.get(i))[1][1]);
+                System.err.println(((String[][])arrRs.get(i))[2][1]);
+           //     */
+                long id0 = Long.parseLong(str);
+                if (id0 == ID0) {
+                    rs = arrRs.get(i);
+                    flg = true;
+                }
+            } catch (Exception e) {
+                //何もしない
+            }
+        }
         //選択したIDをコンボボックスに表示
-        rs = dbIT.getResultSetTable("WHERE id0 = " + ID0);
+        if (!flg) {
+            rs = dbIT.getResultSetTable("WHERE id0 = " + ID0);
+            arrRs.add(rs);
+        }
         jComboBox1.removeAllItems();
         jComboBox1.addItem("");
         for (int i = 1; i < rs[2].length; i++) {
@@ -170,6 +193,7 @@ private int defaultID1 = 0;
         jSplitPane1.setFocusTraversalPolicyProvider(true);
         jSplitPane1.setMinimumSize(new java.awt.Dimension(300, 22));
 
+        Caption.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         Caption.setText("Caption");
         Caption.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         Caption.setDoubleBuffered(true);
@@ -186,6 +210,7 @@ private int defaultID1 = 0;
         jSplitPane2.setOneTouchExpandable(true);
         jSplitPane2.setPreferredSize(new java.awt.Dimension(0, 22));
 
+        postCap.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         postCap.setText("postCap");
         postCap.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         postCap.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -193,6 +218,7 @@ private int defaultID1 = 0;
         jSplitPane2.setRightComponent(postCap);
 
         jComboBox1.setEditable(true);
+        jComboBox1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jComboBox1.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         jComboBox1.setMinimumSize(new java.awt.Dimension(50, 22));
         jComboBox1.setPreferredSize(new java.awt.Dimension(100, 22));

@@ -115,6 +115,7 @@ private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
         jSplitPane1.setDividerSize(1);
         jSplitPane1.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
 
+        Caption.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         Caption.setText("Caption");
         Caption.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         Caption.setFocusable(false);

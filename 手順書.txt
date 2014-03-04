@@ -1,4 +1,6 @@
-for Debian
+■for Debian
+
+
 
 # passwd postgres
 
@@ -19,5 +21,21 @@ createtable!
 
 psql -U postgres OpenSeiho
 COPY id_text FROM '/home/hdm/NetBeansProjects/OpenSeihoCom/id_text.csv' WITH CSV;
+
+
+
+■for Windows
+
+openseiho データベースを作成（UTF8）
+
+・comboID で、以下を入力しEnter
+createtable!
+edit!
+
+psql -U postgres openseiho
+COPY id_text FROM 'C:\pgdata\id_text.csv' WITH CSV;
+
+※CSVは、メモ帳でANSIに変換しておく。
+
 
 

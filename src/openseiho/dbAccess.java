@@ -26,7 +26,7 @@ import java.util.TreeSet;
 public class dbAccess {
     String host = "localhost";
     String port = "5432";
-    String dbname = "OpenSeiho";
+    String dbname = "openseiho";
     String rolename = "postgres";
     String password = "xxxxxxxx";
     String url = "jdbc:postgresql://" + host + ":" + port + "/" + dbname;

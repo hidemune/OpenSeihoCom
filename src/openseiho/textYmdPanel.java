@@ -108,16 +108,13 @@ private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
         ID = new javax.swing.JTextField();
         txtYMD = new javax.swing.JTextField();
 
-        setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
         jSplitPane1.setBorder(null);
         jSplitPane1.setDividerSize(1);
-        jSplitPane1.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
 
         Caption.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         Caption.setText("Caption");
-        Caption.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         Caption.setFocusable(false);
         Caption.setName("Caption"); // NOI18N
         Caption.setPreferredSize(new java.awt.Dimension(50, 23));
@@ -126,18 +123,15 @@ private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
         jSplitPane2.setBorder(null);
         jSplitPane2.setDividerLocation(150);
         jSplitPane2.setDividerSize(1);
-        jSplitPane2.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
 
         ID.setEditable(false);
         ID.setText("yyyymmdd");
-        ID.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         ID.setFocusTraversalPolicyProvider(true);
         ID.setFocusable(false);
         ID.setName("ID"); // NOI18N
         ID.setPreferredSize(new java.awt.Dimension(60, 17));
         jSplitPane2.setRightComponent(ID);
 
-        txtYMD.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         txtYMD.setMinimumSize(new java.awt.Dimension(120, 17));
         txtYMD.setPreferredSize(new java.awt.Dimension(150, 17));
         txtYMD.addActionListener(new java.awt.event.ActionListener() {

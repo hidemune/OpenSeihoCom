@@ -188,14 +188,12 @@ public static ArrayList<String[][]> arrRs = new ArrayList<String[][]>();        
 
         jSplitPane1.setBorder(null);
         jSplitPane1.setDividerSize(1);
-        jSplitPane1.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         jSplitPane1.setDoubleBuffered(true);
         jSplitPane1.setFocusTraversalPolicyProvider(true);
         jSplitPane1.setMinimumSize(new java.awt.Dimension(300, 22));
 
         Caption.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         Caption.setText("Caption");
-        Caption.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         Caption.setDoubleBuffered(true);
         jSplitPane1.setLeftComponent(Caption);
         Caption.getAccessibleContext().setAccessibleParent(this);
@@ -203,7 +201,6 @@ public static ArrayList<String[][]> arrRs = new ArrayList<String[][]>();        
         jSplitPane2.setBorder(null);
         jSplitPane2.setDividerLocation(100);
         jSplitPane2.setDividerSize(1);
-        jSplitPane2.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         jSplitPane2.setDoubleBuffered(true);
         jSplitPane2.setFocusTraversalPolicyProvider(true);
         jSplitPane2.setLastDividerLocation(100);
@@ -212,14 +209,12 @@ public static ArrayList<String[][]> arrRs = new ArrayList<String[][]>();        
 
         postCap.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         postCap.setText("postCap");
-        postCap.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         postCap.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         postCap.setPreferredSize(new java.awt.Dimension(0, 13));
         jSplitPane2.setRightComponent(postCap);
 
         jComboBox1.setEditable(true);
         jComboBox1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jComboBox1.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         jComboBox1.setMinimumSize(new java.awt.Dimension(50, 22));
         jComboBox1.setPreferredSize(new java.awt.Dimension(100, 22));
 

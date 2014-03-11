@@ -35,6 +35,8 @@ import javax.swing.JOptionPane;
 # Heisei since 1989-01-08 00:00:00 local time (Gregorian)
 */
 public class classYMD {
+    public static int defaultErrorIntValue = 99999999;
+    
     //共通部分
     public static boolean DebugMode = false;
     public static void logDebug(String str) {
@@ -182,7 +184,13 @@ public class classYMD {
         }
         return df.format(date);
     }
+    public static String YmdIdToStrS(String str) {
+        return YmdIdToStr(str, false);
+    }
     public static String YmdIdToStr(String str) {
+        return YmdIdToStr(str, true);
+    }
+    public static String YmdIdToStr(String str, boolean flg) {
         logDebug("YmdIdToStr:" + str);
         DecimalFormat exFormat4 = new DecimalFormat("0000");
         DecimalFormat exFormat2 = new DecimalFormat("00");
@@ -242,11 +250,16 @@ public class classYMD {
                 break;
             }
         }
-        int genY = y - sinceY[idx] + 1;
-        if (genY == 1) {
-            str = gengoJ[idx] + "元年" + Integer.toString(m) + "月" + Integer.toString(d) + "日";
+        if (flg) {
+            int genY = y - sinceY[idx] + 1;
+            if (genY == 1) {
+                str = gengoJ[idx] + "元年" + Integer.toString(m) + "月" + Integer.toString(d) + "日";
+            } else {
+                str = gengoJ[idx] + Integer.toString(genY) + "年" + Integer.toString(m) + "月" + Integer.toString(d) + "日";
+            }
         } else {
-            str = gengoJ[idx] + Integer.toString(genY) + "年" + Integer.toString(m) + "月" + Integer.toString(d) + "日";
+            int genY = y - sinceY[idx] + 1;
+            str = gengo[idx] + Integer.toString(genY) + "/" + Integer.toString(m) + "/" + Integer.toString(d);
         }
         return str;
     }
@@ -264,6 +277,47 @@ public class classYMD {
             return 0;
         }
         
+        return ret;
+    }
+    public static int getTukiNissu(String strYmdID) {
+        int nen = getValueI(strYmdID.substring(0, 4));
+        int tuki = getValueI(strYmdID.substring(4, 6));
+        //今月何日か
+        int[] arr = {31,999,31,30,31,30,31,31,30,31,30,31};
+        if (tuki == 2) {
+            //うるう年判定　:　4で割り切れるか。100で割り切れるか。400で割り切れるか。
+            if ((nen % 400) == 0) {
+                return 29;
+            } else if ((nen % 100) == 0) {
+                return 28;
+            } else if ((nen % 4) == 0) {
+                return 29;
+            } else {
+                return 28;
+            }
+        } else {
+            return arr[tuki - 1];
+        }
+    }
+    /**
+     * カラ文字の場合は０，エラーの場合はデフォルトエラー値９９９９９９９９が入ります
+     * @param source
+     * @return 
+     */
+    public static int getValueI(String source) {
+        int ret = 0;
+        try {
+            ret = Integer.parseInt(source);
+        } catch (Exception e) {
+            if (source == null) {
+                return defaultErrorIntValue;
+            }
+            if (source.equals("")) {
+                return 0;
+            } else {
+                ret = defaultErrorIntValue;
+            }
+        }
         return ret;
     }
     public static boolean isNumeric(String str) {

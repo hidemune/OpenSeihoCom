@@ -7,5 +7,7 @@ OpenSeihoCom
 このパッケージに対して修正を行った場合は必ずソースコードを公開してください。
 有用であればプルリクエストをお願い致します。
 
-TANAKA Hidemune <auau@kne.biglobe.ne.jp>
+TANAKA Hidemune <info@tanaka-cs.co.jp>
+
+http://tanaka-cs.co.jp/
 

@@ -66,6 +66,9 @@ public static ArrayList<String[][]> arrRs = new ArrayList<String[][]>();        
     public void setEnabled(boolean flg) {
         jComboBox1.setEnabled(flg);
     }
+    public String getSelectedItem() {
+        return (String) jComboBox1.getSelectedItem();
+    }
     public int getValue() {
         return jComboBox1.getSelectedIndex();
     }

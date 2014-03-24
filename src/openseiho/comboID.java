@@ -80,7 +80,9 @@ public static ArrayList<String[][]> arrRs = new ArrayList<String[][]>();        
             int wk = Integer.parseInt(id1);
             setID1(wk);
         } catch (Exception e) {
-            jComboBox1.setSelectedIndex(0);
+            if (jComboBox1.getItemCount() > 0) {
+                jComboBox1.setSelectedIndex(0);
+            }
             return;
         }
     }

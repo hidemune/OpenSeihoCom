@@ -24,7 +24,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
-import javax.swing.JTextField;
+import openseiho.OsText;
 import javax.swing.LayoutStyle;
 import javax.swing.OverlayLayout;
 import javax.swing.ScrollPaneConstants;
@@ -42,8 +42,8 @@ private javax.swing.JSplitPane[] split;
 private String tableNameWk;
 private DefaultListModel ModelL[];
 private final int maxCols = 26;
-private javax.swing.JTextField[] editPre;
-private javax.swing.JTextField[] edit;
+private openseiho.OsText[] editPre;
+private openseiho.OsText[] edit;
 private javax.swing.JLabel[] name;
 private String[][] strRS;
 
@@ -67,8 +67,8 @@ private dbAccess dbAc;
         lists = new javax.swing.JList[maxCols];
         ModelL = new DefaultListModel[maxCols];
         split = new javax.swing.JSplitPane[maxCols];
-        editPre = new javax.swing.JTextField[maxCols];
-        edit = new javax.swing.JTextField[maxCols];
+        editPre = new openseiho.OsText[maxCols];
+        edit = new openseiho.OsText[maxCols];
         name = new javax.swing.JLabel[maxCols];
         
         initComponents();
@@ -138,11 +138,11 @@ private dbAccess dbAc;
         jScrollPaneSheet.setPreferredSize(new Dimension(90 * maxCols, 200));
         
         //編集画面を生成(コンストラクタで１回のみ実行)
-        jTextFieldTableName.setText(dbA.getTableName());
-        jTextFieldWhere.setText("");
+        OsTextTableName.setText(dbA.getTableName());
+        OsTextWhere.setText("");
         for (int i = 0; i < maxCols; i++) {
-            editPre[i] = new javax.swing.JTextField("");
-            edit[i] = new javax.swing.JTextField("");
+            editPre[i] = new OsText("");
+            edit[i] = new OsText("");
             name[i] = new javax.swing.JLabel("");
             jPanelEdit.add(editPre[i]);
             jPanelEdit.add(edit[i]);
@@ -182,7 +182,7 @@ private dbAccess dbAc;
     //レザルトセットを画面に描画
 @SuppressWarnings("empty-statement")
     public void setResultSet(String rs[][], String where) {
-        jTextFieldWhere.setText(where);
+        OsTextWhere.setText(where);
         strRS = rs;
         String ttl = "";
         for (int i = 0; i < rs.length; i++) {
@@ -315,9 +315,9 @@ private dbAccess dbAc;
         jScrollPaneEdit = new JScrollPane();
         jPanelEdit = new JPanel();
         jLabel1 = new JLabel();
-        jTextFieldTableName = new JTextField();
+        OsTextTableName = new OsText();
         jLabel2 = new JLabel();
-        jTextFieldWhere = new JTextField();
+        OsTextWhere = new OsText();
         jLabelPosision = new JLabel();
         jButtonUpdt = new JButton();
         jButtonDel = new JButton();
@@ -893,9 +893,15 @@ private dbAccess dbAc;
 
         jTabbedPaneSheet.addTab("一覧", jSplitPane1);
 
-        jTextFieldTableName.setEditable(false);
+        jLabel1.setText("テーブル名");
 
-        jTextFieldWhere.setEditable(false);
+        OsTextTableName.setEditable(false);
+
+        jLabel2.setText("Where句");
+
+        OsTextWhere.setEditable(false);
+
+        jLabelPosision.setText("+");
 
         jButtonUpdt.setText("更新");
         jButtonUpdt.setEnabled(false);
@@ -913,6 +919,10 @@ private dbAccess dbAc;
             }
         });
 
+        jLabel3.setText("変更前");
+
+        jLabel4.setText("変更後");
+
         GroupLayout jPanelEditLayout = new GroupLayout(jPanelEdit);
         jPanelEdit.setLayout(jPanelEditLayout);
         jPanelEditLayout.setHorizontalGroup(
@@ -923,12 +933,12 @@ private dbAccess dbAc;
                     .addGroup(jPanelEditLayout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldWhere, GroupLayout.PREFERRED_SIZE, 504, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(OsTextWhere, GroupLayout.PREFERRED_SIZE, 504, GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanelEditLayout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldTableName, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(OsTextTableName, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonDel)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
@@ -952,14 +962,14 @@ private dbAccess dbAc;
                         .addContainerGap()
                         .addGroup(jPanelEditLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(jTextFieldTableName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(OsTextTableName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanelEditLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(jButtonUpdt)
                         .addComponent(jButtonDel)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelEditLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextFieldWhere, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                    .addComponent(OsTextWhere, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelEditLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -1065,7 +1075,7 @@ private dbAccess dbAc;
         
         //一覧を再表示
         //テーブルのレザルトセットを取得
-        String where = jTextFieldWhere.getText();
+        String where = OsTextWhere.getText();
         String[][] str = dbAc.getResultSetTable(where);
         //結果を一覧にセット
         setResultSet(str, where);
@@ -1114,7 +1124,7 @@ private dbAccess dbAc;
         
         //一覧を再表示
         //テーブルのレザルトセットを取得
-        String where = jTextFieldWhere.getText();
+        String where = OsTextWhere.getText();
         String[][] str = dbAc.getResultSetTable(where);
         //結果を一覧にセット
         setResultSet(str, where);
@@ -1159,6 +1169,8 @@ private dbAccess dbAc;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private OsText OsTextTableName;
+    private OsText OsTextWhere;
     private JButton jButtonDel;
     private JButton jButtonUpdt;
     private JComboBox jComboBox1;
@@ -1253,7 +1265,5 @@ private dbAccess dbAc;
     private JSplitPane jSplitPaneCol8;
     private JSplitPane jSplitPaneCol9;
     private JTabbedPane jTabbedPaneSheet;
-    private JTextField jTextFieldTableName;
-    private JTextField jTextFieldWhere;
     // End of variables declaration//GEN-END:variables
 }

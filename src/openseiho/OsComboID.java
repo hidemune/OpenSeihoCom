@@ -21,7 +21,7 @@ import javax.swing.JPanel;
  * read!        ：テーブルを再読み込みします。
  * 
  */
-public class comboID extends JPanel {
+public class OsComboID extends JPanel {
 private dbIdText dbIT;
 private Integer ID0 = 0;
 private String[][] rs;
@@ -39,7 +39,7 @@ public static ArrayList<String[][]> arrRs = new ArrayList<String[][]>();        
     /**
      * Creates new form comboID
      */
-    public comboID() {
+    public OsComboID() {
         initComponents();
         //dbIT.DebugMode = true;
         dbIT = new dbIdText();

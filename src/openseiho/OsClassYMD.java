@@ -34,7 +34,7 @@ import javax.swing.JOptionPane;
 # Showa since 1926-12-25 00:00:00 local time (Gregorian)
 # Heisei since 1989-01-08 00:00:00 local time (Gregorian)
 */
-public class classYMD {
+public class OsClassYMD {
     public static int defaultErrorIntValue = 99999999;
     
     //共通部分

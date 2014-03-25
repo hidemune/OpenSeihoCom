@@ -7,20 +7,20 @@ package openseiho;
 import java.awt.Color;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import openseiho.classYMD;
+import openseiho.OsClassYMD;
 
 /**
  *
  * @author TANAKA Hidemune <auau@kne.biglobe.ne.jp>
  */
-public class textYmdPanel extends javax.swing.JPanel {
+public class OsTextYmd extends javax.swing.JPanel {
 private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
     /**
      * Creates new form textYmdPanel
      * FocusTraversalPolicyは、「なし」にしておく必要あり（タブ移動ができなくなるため）
      */
-    public textYmdPanel() {
+    public OsTextYmd() {
         initComponents();
         txtYMD.enableInputMethods(false);
     }
@@ -59,7 +59,7 @@ private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
             pcs.firePropertyChange("ID", pre, "00000000");
             return;
         }
-        txtYMD.setText(classYMD.YmdIdToStr(str));
+        txtYMD.setText(OsClassYMD.YmdIdToStr(str));
     }
     public String getID() {
         return this.ID.getText();
@@ -150,7 +150,7 @@ private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
         // TODO add your handling code here:
         //YMD変換
         String str = this.txtYMD.getText();
-        String ID = classYMD.StrToYmdId(str);
+        String ID = OsClassYMD.StrToYmdId(str);
         //プロパティを直接変更
         setID(ID);
         

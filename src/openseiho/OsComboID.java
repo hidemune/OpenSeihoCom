@@ -85,7 +85,7 @@ public static ArrayList<String[][]> arrRs = new ArrayList<String[][]>();        
         return jComboBox1.getSelectedIndex();
     }
     public String getID1() {
-        return rs[1][jComboBox1.getSelectedIndex()];
+        return rs[jComboBox1.getSelectedIndex()][1];
     }
     public void setID1(String id1) {
         try {
@@ -99,10 +99,10 @@ public static ArrayList<String[][]> arrRs = new ArrayList<String[][]>();        
         }
     }
     public void setID1(Integer id1) {
-        for (int i = 1; i < rs[1].length; i++) {
+        for (int i = 1; i < rs.length; i++) {
             int idx = 0;
             try {
-                idx = Integer.parseInt(rs[1][i]);
+                idx = Integer.parseInt(rs[i][1]);
             } catch (Exception e) {
                 //何もしない
             }
@@ -131,7 +131,7 @@ public static ArrayList<String[][]> arrRs = new ArrayList<String[][]>();        
         boolean flg = false;
         for (int i = 0; i < arrRs.size(); i++) {
             try {
-                String str = ((String[][])arrRs.get(i))[0][1];
+                String str = ((String[][])arrRs.get(i))[1][0];
                 /*
                 System.err.println(((String[][])arrRs.get(i))[0][1]);
                 System.err.println(((String[][])arrRs.get(i))[1][1]);
@@ -148,13 +148,13 @@ public static ArrayList<String[][]> arrRs = new ArrayList<String[][]>();        
         }
         //選択したIDをコンボボックスに表示
         if (!flg) {
-            rs = dbIT.getResultSetTable("WHERE id0 = " + ID0);
+            rs = dbIT.getResultSetTable("WHERE id0 = " + ID0, 0, 1000);
             arrRs.add(rs);
         }
         jComboBox1.removeAllItems();
         jComboBox1.addItem("");
-        for (int i = 1; i < rs[2].length; i++) {
-            jComboBox1.addItem(rs[2][i]);
+        for (int i = 1; i < rs.length; i++) {
+            jComboBox1.addItem(rs[i][2]);
         }
         logDebug("Default:" + defaultID1);
         setSelectedIndexID1(0);
@@ -164,17 +164,17 @@ public static ArrayList<String[][]> arrRs = new ArrayList<String[][]>();        
         try {
             if ((defaultID1 != 0) && (id1 == 0)) {
                 //デフォルト値あり、ID指定なしの場合
-                for1:for (int i = 1; i < rs[1].length; i++) {
-                    logDebug("rs_id0:" + rs[0][i]);
-                    logDebug("rs_id1:" + rs[1][i]);
-                    if (Integer.parseInt(rs[1][i]) == defaultID1) {
+                for1:for (int i = 1; i < rs.length; i++) {
+                    logDebug("rs_id0:" + rs[i][0]);
+                    logDebug("rs_id1:" + rs[i][1]);
+                    if (Integer.parseInt(rs[i][1]) == defaultID1) {
                         jComboBox1.setSelectedIndex(i);
                         break for1;
                     }
                 }
             } else {
-                for2:for (int i = 1; i < rs[1].length; i++) {
-                    if (Integer.parseInt(rs[1][i]) == id1) {
+                for2:for (int i = 1; i < rs.length; i++) {
+                    if (Integer.parseInt(rs[i][1]) == id1) {
                         jComboBox1.setSelectedIndex(i);
                         break for2;
                     }
@@ -306,10 +306,10 @@ public static ArrayList<String[][]> arrRs = new ArrayList<String[][]>();        
             
             //エディット時のみ設定（入力したものを選択）
             logDebug("エディット時のみ設定:" + id);
-            for (int i = 1; i < rs[1].length; i++) {
+            for (int i = 1; i < rs.length; i++) {
                 int idWk = 0;
                 try {
-                    idWk = Integer.parseInt(rs[1][i]);
+                    idWk = Integer.parseInt(rs[i][1]);
                 } catch (Exception e) {
                     //何もしない
                 }

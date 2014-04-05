@@ -21,11 +21,13 @@ package openseiho;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Properties;
 import java.util.TreeSet;
 
@@ -44,7 +46,7 @@ public class dbAccess {
     String url = "jdbc:postgresql://" + host + ":" + port + "/" + dbname;
     
     //共通部分
-    public static boolean DebugMode = false;
+    public static boolean DebugMode = true;
     public static void logDebug(String str) {
         if (DebugMode) {
             System.out.println(str);
@@ -81,10 +83,11 @@ public class dbAccess {
     public void editTable(dbAccess dbA, String where) {
         dbSheetFrame frm = new dbSheetFrame(dbA);
         frm.setVisible(true);
+        frm.editTable(where);
         //テーブルのレザルトセットを取得
-        String[][] str = getResultSetTable(where);
+        //String[][] str = getResultSetTable(where, frm.getPage(), frm.pageCount);
         //結果を一覧にセット
-        frm.setResultSet(str, where);
+        //frm.setResultSet(str, where);
     }
     
     //ExecSQL
@@ -147,11 +150,13 @@ public class dbAccess {
     }
     
     /**
-     * デフォルトソート版：強制的に、先頭カラムから順にソートされます。
+     * デフォルトソート版：強制的に、主キーでソートされます。
      * @param where
+     * @param pageNo : 0から始まります
+     * @param rowCount : ページあたりの行数です
      * @return 
      */
-    public String[][] getResultSetTable(String where) {
+    public String[][] getResultSetTable(String where, int pageNo, int rowCount) {
         System.out.println("getResultSetTable" + tableNameSup);
         String[][] ret = new String[tableFieldSup.length][1]; //col,rowの順
         Properties props = new Properties();
@@ -169,45 +174,74 @@ public class dbAccess {
             //con.setAutoCommit(false);
             
             //ステートメント作成
-            Statement stmt = con.createStatement();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             
             //列数取得
 //            ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM " + tableNameSup);
  //           rs.next();
  //           int rows = rs.getInt("COUNT");
 //            System.out.println(rows);
-            
+            //Order by
+            StringBuilder sb = new StringBuilder();
+            sb.append(" ORDER BY ");
+            String sep = "";
+            for (int i = 0; i < tablePrimarySup.length; i++) {
+                sb.append(sep);
+                sb.append(tablePrimarySup[i]);
+                sep = ",";
+            }
             //行数取得
-            ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM " + tableNameSup + " " + where);
-            rs.next();
-            int rows = rs.getInt("COUNT");
-            System.out.println("rows:" + rows);
-            rs.close();
+//            String SQL = "SELECT COUNT(*) FROM " + tableNameSup + " " + where + sb.toString();
+//            logDebug(SQL);
+//            ResultSet rs = stmt.executeQuery(SQL);
+//            rs.next();
+//            int rows = rs.getInt("COUNT");
+//            System.out.println("rows:" + rows);
+//            rs.close();
             
             //SQLの実行
-            rs = stmt.executeQuery("SELECT * FROM " + tableNameSup + " " + where);
+            String Offset = " LIMIT " + rowCount + " OFFSET " + (rowCount * pageNo);
+            String SQL = "SELECT * FROM " + tableNameSup + " " + where + sb.toString() + " " + Offset;
+            logDebug(SQL);
+            ResultSet rs = stmt.executeQuery(SQL);
+            
+            /*
+            rs.setFetchDirection(ResultSet.FETCH_FORWARD);
+            rs.last();
+            int rows = rs.getRow() - 1;
+            rs.setFetchDirection(ResultSet.FETCH_REVERSE);
+            rs.first();
+            logDebug("rows:" + rows);
             
             int cols = tableFieldSup.length;
-            System.out.println("cols:" + cols);
+            logDebug("cols:" + cols);
             //配列の枠を作成
             ret = new String[cols][rows + 1]; //タイトル分１行多い
+            */
             
-            //Title
-            for (int i = 0; i < cols; i++) {
-                logDebug("Title" + i + ":" + tableFieldSup[i][0]);
-                ret[i][0] = tableFieldSup[i][0];
+            ResultSetMetaData rsmd= rs.getMetaData();
+            List listRs = new ArrayList();
+            //配列の枠を作成
+            String[] wk = new String[rsmd.getColumnCount()];
+            for (int i = 1; i <= rsmd.getColumnCount(); i++) {      //列の数は１から
+                logDebug("取得RSカラム名：" + rsmd.getColumnName(i));
+                wk[i - 1] = rsmd.getColumnName(i);
             }
+            listRs.add(wk);
             
             //Data
             int idx = 0;
             while (rs.next()) {
-                idx = idx + 1;
-                for (int j = 0; j < cols; j++) {
-                    ret[j][idx] = rs.getString(j + 1);
-                    logDebug("Data" + idx + "," + j + ":" + rs.getString(j + 1));
-                    logDebug("ret[][]" + idx + "," + j + ":" + ret[j][idx]);
+                wk = new String[rsmd.getColumnCount()];
+                for (int j = 0; j < rsmd.getColumnCount(); j++) {
+                    wk[j] = rs.getString(j + 1);
                 }
+                listRs.add(wk);
             }
+            
+            //ArrayListから２次元配列を作成
+            ret = (String[][])listRs.toArray(new String[0][0]);
+            printRS(ret);
             
             rs.close();
             
@@ -234,15 +268,86 @@ public class dbAccess {
                 e.printStackTrace();
             }
         }
-        ret = sortArray(ret);
+        //ret = sortArray(ret);
         return ret;
     }
+    public int getResultSetTableCount(String where) {
+        String[][] ret = new String[tableFieldSup.length][1]; //col,rowの順
+        Properties props = new Properties();
+        props.setProperty("user", rolename);
+        props.setProperty("password", password);
+        Connection con = null;
+        int rows = 0;
+        
+        try {
+            Class.forName("org.postgresql.Driver");
+            
+            con = DriverManager.getConnection(url, props);
+            System.out.println("データベースに接続しました。");
+            
+            //自動コミットを無効にする
+            //con.setAutoCommit(false);
+            
+            //ステートメント作成
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            
+            //列数取得
+            ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM " + tableNameSup + " " + where);
+            rs.next();
+            rows = rs.getInt("COUNT");
+            System.out.println(rows);
+            
+            rs.close();
+            
+            //ステートメントのクローズ
+            stmt.close();
+            
+            //コミットする
+            //con.commit();
+        } catch (ClassNotFoundException e) {
+            System.err.println("JDBCドライバが見つかりませんでした。");
+        } catch (SQLException e) {
+            System.err.println("エラーコード　　: " + e.getSQLState());
+            System.err.println("エラーメッセージ: " + e.getMessage());
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                    System.out.println("データベースとの接続を切断しました。");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        //ret = sortArray(ret);
+        return rows;
+    }
+    
+    /**
+     * レザルトセットを標準出力に
+     * 
+     */
+    public static void printRS(String[][] rs) {
+        for (int i = 0; i < rs.length; i++) {
+            StringBuilder sb = new StringBuilder();
+            for (int j = 0; j < rs[i].length; j++) {
+                sb.append(rs[i][j]);
+                sb.append("\t");
+            }
+            //sb.append("\n");
+            System.out.println(sb.toString());
+        }
+    }
+    
     /**
      * ２次元配列をソートして返します
      * 　:Resultset用なので、最初の一行はカラム名とみなし、ソートしません。
      * @param src
      * @return 
-     */
+     */ /*
     private String[][] sortArray(String[][] src) {
         int cols = src.length;
         int rows = src[0].length;
@@ -286,7 +391,7 @@ public class dbAccess {
         
         return desc;
     }
-
+// */
     //CREATE TABLE
     public void createTable(){
         logDebug("Create/テーブル名:" + tableNameSup);

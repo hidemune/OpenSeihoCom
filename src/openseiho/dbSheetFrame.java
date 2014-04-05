@@ -22,6 +22,8 @@ import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import javax.swing.AbstractListModel;
 import javax.swing.DefaultComboBoxModel;
@@ -36,7 +38,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
-import openseiho.OsText;
 import javax.swing.LayoutStyle;
 import javax.swing.OverlayLayout;
 import javax.swing.ScrollPaneConstants;
@@ -60,6 +61,8 @@ private javax.swing.JLabel[] name;
 private String[][] strRS;
 
 private dbAccess dbAc;
+private String whereT = "";
+public static int pageCount = 10;
 
     //共通部分
     public static boolean DebugMode = false;
@@ -197,15 +200,15 @@ private dbAccess dbAc;
         OsTextWhere.setText(where);
         strRS = rs;
         String ttl = "";
-        for (int i = 0; i < rs.length; i++) {
+        for (int i = 0; i < rs[0].length; i++) {
             ModelL[i].clear();
-            for (int j = 0; j < rs[i].length; j++) {
+            for (int j = 0; j < rs.length; j++) {
                 if (j == 0) {
                     ttl = "■";
                 } else {
                     ttl = "";
                 }
-                ModelL[i].addElement(ttl + rs[i][j] + ttl);;
+                ModelL[i].addElement(ttl + rs[j][i] + ttl);;
             }
             lists[i].setModel(ModelL[i]);
         }
@@ -216,6 +219,35 @@ private dbAccess dbAc;
         //一旦ボタンを不可にする
         jButtonUpdt.setEnabled(false);
         jButtonDel.setEnabled(false);
+        jList1.setSelectedIndex(0);
+        selectList(jList1);
+    }
+    
+    //Edit by Sheet
+    public void editTable(String where) {
+        whereT = where;
+        //テーブルのレザルトセットを取得
+        int count = dbAc.getResultSetTableCount(where);
+        setPage(count);
+        String[][] str = dbAc.getResultSetTable(where, getPage(), pageCount);
+        //結果を一覧にセット
+        setResultSet(str, where);
+    }
+    
+    public int getPage() {
+        int ret = comboPage.getSelectedIndex();
+        if (ret < 0) {
+            ret = 0;
+        }
+        return ret;
+    }
+    public void setPage(int rowcount) {
+        int idx = (int) Math.floor((double)rowcount / (double)pageCount);
+        NumberFormat nf = new DecimalFormat("#0000");
+        comboPage.removeAllItems();
+        for (int i = 0; i <= idx; i++) {
+            comboPage.addItem(nf.format(i + 1) + "Page");
+        }
     }
     
     private void selectList(JList lst)  {
@@ -242,7 +274,7 @@ private dbAccess dbAc;
         jTabbedPaneSheet = new JTabbedPane();
         jSplitPane1 = new JSplitPane();
         jPanel1 = new JPanel();
-        jComboBox1 = new JComboBox();
+        comboPage = new JComboBox();
         jPanelSheet = new JPanel();
         jScrollPaneSheet = new JScrollPane();
         jSplitPaneCol1 = new JSplitPane();
@@ -341,20 +373,25 @@ private dbAccess dbAc;
         jSplitPane1.setDividerLocation(25);
         jSplitPane1.setOrientation(JSplitPane.VERTICAL_SPLIT);
 
-        jComboBox1.setModel(new DefaultComboBoxModel(new String[] { "00001 Page" }));
+        comboPage.setModel(new DefaultComboBoxModel(new String[] { "00001 Page" }));
+        comboPage.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                comboPageActionPerformed(evt);
+            }
+        });
 
         GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 552, Short.MAX_VALUE)
-                .addComponent(jComboBox1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 555, Short.MAX_VALUE)
+                .addComponent(comboPage, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jComboBox1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(comboPage, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -1023,8 +1060,8 @@ private dbAccess dbAc;
             //データが選択されていない：新規作成
             jButtonUpdt.setEnabled(true);
             jButtonDel.setEnabled(false);
-            for (int i = 0; i < strRS.length; i++) {
-                name[i].setText(strRS[i][0]);
+            for (int i = 0; i < strRS[0].length; i++) {
+                name[i].setText(strRS[0][i]);
                 editPre[i].setText("");
                 edit[i].setText("");
             }
@@ -1032,8 +1069,8 @@ private dbAccess dbAc;
             //データを選択している場合
             jButtonUpdt.setEnabled(true);
             jButtonDel.setEnabled(true);
-            for (int i = 0; i < strRS.length; i++) {
-                name[i].setText(strRS[i][0]);
+            for (int i = 0; i < strRS[0].length; i++) {
+                name[i].setText(strRS[0][i]);
                 editPre[i].setText((String)lists[i].getSelectedValue());
                 edit[i].setText((String)lists[i].getSelectedValue());
             }
@@ -1088,7 +1125,7 @@ private dbAccess dbAc;
         //一覧を再表示
         //テーブルのレザルトセットを取得
         String where = OsTextWhere.getText();
-        String[][] str = dbAc.getResultSetTable(where);
+        String[][] str = dbAc.getResultSetTable(where, getPage(), pageCount);
         //結果を一覧にセット
         setResultSet(str, where);
         
@@ -1137,12 +1174,18 @@ private dbAccess dbAc;
         //一覧を再表示
         //テーブルのレザルトセットを取得
         String where = OsTextWhere.getText();
-        String[][] str = dbAc.getResultSetTable(where);
+        String[][] str = dbAc.getResultSetTable(where, getPage(), pageCount);
         //結果を一覧にセット
         setResultSet(str, where);
         
         return;
     }//GEN-LAST:event_jButtonDelActionPerformed
+
+    private void comboPageActionPerformed(ActionEvent evt) {//GEN-FIRST:event_comboPageActionPerformed
+        String[][] str = dbAc.getResultSetTable(whereT, getPage(), pageCount);
+        //結果を一覧にセット
+        setResultSet(str, whereT);
+    }//GEN-LAST:event_comboPageActionPerformed
     
     /**
      * @param args the command line arguments
@@ -1183,9 +1226,9 @@ private dbAccess dbAc;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private OsText OsTextTableName;
     private OsText OsTextWhere;
+    private JComboBox comboPage;
     private JButton jButtonDel;
     private JButton jButtonUpdt;
-    private JComboBox jComboBox1;
     private JLabel jLabel1;
     private JLabel jLabel2;
     private JLabel jLabel3;

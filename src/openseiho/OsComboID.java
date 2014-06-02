@@ -119,7 +119,11 @@ public static ArrayList<String[][]> arrRs = new ArrayList<String[][]>();        
     }
     public void setId0(Integer id0) {
         this.ID0 = id0;
-        this.setList();
+        try{
+            this.setList();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
     public void setComboWidth(Integer width) {
         jSplitPane2.setDividerLocation(width);

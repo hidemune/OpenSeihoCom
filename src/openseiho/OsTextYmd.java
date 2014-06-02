@@ -19,6 +19,7 @@
 package openseiho;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import openseiho.OsClassYMD;
@@ -37,6 +38,7 @@ private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
     public OsTextYmd() {
         initComponents();
         txtYMD.enableInputMethods(false);
+        ID.setPreferredSize(new Dimension(80, 27));
     }
 
     public void setTextYmdErr(boolean error) {
@@ -143,7 +145,7 @@ private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
         ID.setFocusTraversalPolicyProvider(true);
         ID.setFocusable(false);
         ID.setName("ID"); // NOI18N
-        ID.setPreferredSize(new java.awt.Dimension(60, 17));
+        ID.setPreferredSize(new java.awt.Dimension(100, 17));
         jSplitPane2.setRightComponent(ID);
 
         txtYMD.setMinimumSize(new java.awt.Dimension(120, 17));

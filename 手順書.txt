@@ -39,3 +39,27 @@ COPY id_text FROM 'C:\pgdata\id_text.csv' WITH CSV;
 
 COPY kijyun FROM 'C:\pgdata\kijyun.csv' WITH CSV;
 
+
+
+■for Ubuntu
+
+postgresql,pgadmin をインストール
+
+$ sudo passwd postgres
+
+sudo su - postgres
+psql -c "alter user postgres with password 'xxxxxxxx'"
+
+exit
+
+$ sudo su - postgres
+$ createdb -O postgres OpenSeiho
+
+OpenSeihoComを起動
+
+comboIdTextで、
+createtable!
+を入力してEnterを押す
+
+ビルドを行う
+　→　OpenSeihoNintei へ

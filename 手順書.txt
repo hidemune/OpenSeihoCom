@@ -20,7 +20,13 @@ createtable!
 # su - postgres
 
 psql -U postgres OpenSeiho
-COPY id_text FROM '/home/hdm/NetBeansProjects/OpenSeihoCom/id_text.csv' WITH CSV;
+COPY id_text FROM '/home/user/git/OpenSeihoCom/id_text.csv' WITH CSV;
+
+\q
+
+
+
+COPY id_text TO '/home/user/git/OpenSeihoCom/id_textTest.csv' WITH CSV;
 
 
 

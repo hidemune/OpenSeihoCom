@@ -18,21 +18,46 @@
 
 package openseiho;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 /**
  *
  * @author TANAKA_Hidemune
  */
 public class OsText extends javax.swing.JTextField {
     private int mode = 0;//nanimosinai
-    
+    private int henkanSta = -1;
     public OsText() {
         super();
         
         this.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
-                OsText.henkan((OsText) e.getSource());
+                OsText.henkan((OsText)e.getSource());
             }
         });
+        /*
+        this.addKeyListener(new KeyListener() {
+            
+            @Override
+            public void keyTyped(KeyEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if (e.getKeyChar() == ' ') {
+                    OsText.henkan((OsText)e.getSource());
+                    e.consume();
+                }
+            }
+        });
+        // */
     }
     public OsText(String string) {
         super.setText(string);
@@ -44,8 +69,8 @@ public class OsText extends javax.swing.JTextField {
         return this.mode;
     }
     //roma ji kana henkan
-    public static void henkan(OsText Pthis) {
-        String str = Pthis.getText();
+    public static void henkan(OsText txt) {
+        String str = txt.getText();
         StringBuilder sb = new StringBuilder();
         String[][] dic =  {
             {"a", "あ"},
@@ -140,24 +165,40 @@ public class OsText extends javax.swing.JTextField {
             {"xe", "ぇ"},
             {"xo", "ぉ"},
         };
+        int henkanSta = -1;
         for (int i=0;i<str.length();i++) {
             String sub = str.substring(i).toLowerCase();
             int j;
+            boolean flg = false;
             for( j=0;j<dic.length;j++) {
                 if (sub.startsWith(dic[j][0])) {
                     sb.append(dic[j][1]);
+                    if (henkanSta < 0) {
+                        txt.setHenkanSta(i);
+                        henkanSta = i;
+                    }
                     i = i + dic[j][0].length() - 1;
+                    flg = true;
                     break;
                 }
             }
-            if (sub.charAt(0) == sub.charAt(1)) {
+            if ((sub.length() > 1) &&(sub.charAt(0) == sub.charAt(1)) &&(sub.charAt(0) >= 'a')&&(sub.charAt(0) <= 'z')) {
                 sb.append("っ");
-            }else if (j >= dic.length) {
+            } else if (!flg && (sub.charAt(0) == 'n')) {
+                sb.append("ん");
+            } else if (j >= dic.length) {
                 //gaitounasi
                 sb.append(sub.charAt(0));
             }
         }
-        Pthis.setText(sb.toString());
+        txt.setText(sb.toString());
+
+    }
+    public void setHenkanSta(int Sta) {
+        this.henkanSta = Sta;
+    }
+    public int getHenkanSta() {
+        return henkanSta;
     }
     /**
      *

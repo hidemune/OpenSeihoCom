@@ -161,11 +161,14 @@ java.awt.Frame frm = null;
             }
         });
 
+        textJyusyo1.setMode(2);
         textJyusyo1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textJyusyo1ActionPerformed(evt);
             }
         });
+
+        textJyusyo2.setMode(2);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);

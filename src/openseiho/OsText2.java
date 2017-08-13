@@ -17,15 +17,18 @@
  */
 package openseiho;
 
-import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.EventListener;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
@@ -36,24 +39,58 @@ import javax.swing.JPopupMenu;
 public class OsText2 extends javax.swing.JPanel {
     OsText2 Pthis;
     JPopupMenu menu = new JPopupMenu() ;
+
+    private String caption = "";
+    private int captionWidth = 100;
+    
     /**
      * Creates new form OsText2
      */
     public OsText2() {
         initComponents();
         Pthis = this;
-        
-        osText1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                Pthis.henkan(e);
-            }
-        });
     }
+
+    @Override
+    public synchronized void addKeyListener(KeyListener l) {
+        osText1.addKeyListener(l); //To change body of generated methods, choose Tools | Templates.
+    }
+    
     public void setText(String value) {
         osText1.setText(value);
     }
     public String getText() {
         return osText1.getText();
+    }
+    public void setCaption(String caption) {
+        this.caption = caption;
+        jLabel1.setText(caption);
+    }
+    public String getCaption() {
+        return this.caption;
+    }
+    public void setCaptionWidth(int width) {
+        this.captionWidth = width;
+        jLabel1.setPreferredSize(new Dimension(width, this.getHeight()));
+        this.repaint();
+    }
+    public int getCaptionWidth() {
+        return this.captionWidth;
+    }
+    public void setmode(int mode) {
+        osText1.setMode(mode);
+        
+        if (mode == 2) {
+            osText1.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent e) {
+                    Pthis.henkan(e);
+                }
+            });
+        }
+        
+    }
+    public int getMode() {
+        return osText1.getMode();
     }
     public void henkan(java.awt.event.ActionEvent e) {
         OsText txt = (OsText)e.getSource();
@@ -120,28 +157,16 @@ public class OsText2 extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         osText1 = new openseiho.OsText();
 
+        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
+
         jLabel1.setText("OsText2");
+        jLabel1.setMaximumSize(new java.awt.Dimension(100, 16));
+        jLabel1.setMinimumSize(new java.awt.Dimension(100, 16));
+        jLabel1.setPreferredSize(new java.awt.Dimension(100, 16));
+        add(jLabel1);
 
         osText1.setText("osText1");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(osText1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(osText1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+        add(osText1);
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -166,5 +191,9 @@ public class OsText2 extends javax.swing.JPanel {
             System.out.println(this.name);
             Pthis.setText(this.pre + this.name);
         }
+    }
+    // イベントを発生させる
+    public interface MyKeyListener extends KeyListener {
+        public void MyKeyRereased(java.awt.event.KeyEvent e);
     }
 }

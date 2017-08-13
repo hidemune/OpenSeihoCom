@@ -18,6 +18,9 @@
 
 package openseiho;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 /**
  *
  * @author hdm
@@ -34,7 +37,7 @@ private OsTextYmd textYmd;
         this.add(textYmd);
         textYmd.setVisible(true);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -67,6 +70,20 @@ private OsTextYmd textYmd;
 
         osTextNum2.setText("000");
 
+        osText21.setCaptionWidth(50);
+
+        osText22.setCaption("Test");
+        osText22.setCaptionWidth(50);
+        osText22.setmode(1);
+        osText22.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                osText22KeyReleased(evt);
+            }
+        });
+
+        osText23.setCaptionWidth(50);
+        osText23.setmode(2);
+
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -87,11 +104,11 @@ private OsTextYmd textYmd;
                             .add(org.jdesktop.layout.GroupLayout.LEADING, osTextNum2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .add(org.jdesktop.layout.GroupLayout.LEADING, osText1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                        .add(osText21, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(osText21, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 159, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(osText22, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(osText23, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                        .add(osText22, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 161, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(29, 29, 29)
+                        .add(osText23, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 206, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                 .add(0, 237, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -119,6 +136,10 @@ private OsTextYmd textYmd;
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void osText22KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_osText22KeyReleased
+        System.out.println(evt.getKeyChar());
+    }//GEN-LAST:event_osText22KeyReleased
 
     /**
      * @param args the command line arguments

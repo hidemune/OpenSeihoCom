@@ -20,6 +20,7 @@ package openseiho;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.EventListener;
 
 /**
  *
@@ -28,15 +29,11 @@ import java.awt.event.KeyListener;
 public class OsText extends javax.swing.JTextField {
     private int mode = 0;//nanimosinai
     private int henkanSta = -1;
+
     public OsText() {
         super();
         
-        this.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                OsText.henkan((OsText)e.getSource());
-            }
-        });
-        /*
+         /*
         this.addKeyListener(new KeyListener() {
             
             @Override
@@ -51,10 +48,7 @@ public class OsText extends javax.swing.JTextField {
 
             @Override
             public void keyReleased(KeyEvent e) {
-                if (e.getKeyChar() == ' ') {
-                    OsText.henkan((OsText)e.getSource());
-                    e.consume();
-                }
+                
             }
         });
         // */
@@ -64,10 +58,18 @@ public class OsText extends javax.swing.JTextField {
     }
     public void setMode(int mode) {
         this.mode = mode;
+        if (mode > 0) {
+            this.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent e) {
+                    OsText.henkan((OsText)e.getSource());
+                }
+            });
+        }
     }
     public int getMode() {
         return this.mode;
     }
+
     //roma ji kana henkan
     public static void henkan(OsText txt) {
         String str = txt.getText();
@@ -191,7 +193,7 @@ public class OsText extends javax.swing.JTextField {
                 sb.append(sub.charAt(0));
             }
         }
-        txt.setText(sb.toString());
+        txt.setText(sb.toString().replaceAll(" ", "　"));
 
     }
     public void setHenkanSta(int Sta) {

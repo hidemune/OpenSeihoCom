@@ -107,11 +107,17 @@
       </Events>
     </Component>
     <Component class="openseiho.OsText" name="textJyusyo1">
+      <Properties>
+        <Property name="mode" type="int" value="2"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textJyusyo1ActionPerformed"/>
       </Events>
     </Component>
     <Component class="openseiho.OsText" name="textJyusyo2">
+      <Properties>
+        <Property name="mode" type="int" value="2"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

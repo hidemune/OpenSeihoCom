@@ -42,11 +42,11 @@
                           <Component id="osText1" alignment="0" pref="93" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="osText21" min="-2" max="-2" attributes="0"/>
+                      <Component id="osText21" min="-2" pref="159" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="osText22" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="osText23" min="-2" max="-2" attributes="0"/>
+                      <Component id="osText22" min="-2" pref="161" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                      <Component id="osText23" min="-2" pref="206" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="0" pref="237" max="32767" attributes="0"/>
@@ -112,10 +112,25 @@
       </Properties>
     </Component>
     <Component class="openseiho.OsText2" name="osText21">
+      <Properties>
+        <Property name="captionWidth" type="int" value="50"/>
+      </Properties>
     </Component>
     <Component class="openseiho.OsText2" name="osText22">
+      <Properties>
+        <Property name="caption" type="java.lang.String" value="Test"/>
+        <Property name="captionWidth" type="int" value="50"/>
+        <Property name="mode" type="int" value="1"/>
+      </Properties>
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="osText22KeyReleased"/>
+      </Events>
     </Component>
     <Component class="openseiho.OsText2" name="osText23">
+      <Properties>
+        <Property name="captionWidth" type="int" value="50"/>
+        <Property name="mode" type="int" value="2"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
